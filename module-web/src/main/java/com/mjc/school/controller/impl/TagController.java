@@ -8,11 +8,12 @@ import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceTagDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class TagController implements BaseController<TagDto, TagDto, Long> {
     private final BaseService<ServiceTagDto, ServiceTagDto, Long> tagService;
     private final ServiceToWebDTOMapper mapper = new ServiceToWebDTOMapper();

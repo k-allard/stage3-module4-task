@@ -10,11 +10,12 @@ import com.mjc.school.service.dto.ServiceAuthorRequestDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class AuthorController implements BaseController<AuthorRequestDto, AuthorResponseDto, Long> {
     private final BaseService<ServiceAuthorRequestDto, ServiceAuthorResponseDto, Long> authorService;
     private final ServiceToWebDTOMapper mapper = new ServiceToWebDTOMapper();

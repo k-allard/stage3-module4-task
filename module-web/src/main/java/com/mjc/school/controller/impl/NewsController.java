@@ -15,11 +15,13 @@ import com.mjc.school.service.dto.ServiceNewsResponseDto;
 import com.mjc.school.service.dto.ServiceTagDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class NewsController implements BaseController<NewsRequestDto, NewsResponseDto, Long>, ExtendedController {
     private final BaseService<ServiceNewsRequestDto, ServiceNewsResponseDto, Long> newsService;
     private final ExtendedService extendedService;
@@ -31,6 +33,11 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
             ExtendedService extendedService) {
         this.newsService = newsService;
         this.extendedService = extendedService;
+    }
+
+    @GetMapping("/sample2")
+    public String showForm() {
+        return "sample2";
     }
 
     @CommandHandler(code = 1)

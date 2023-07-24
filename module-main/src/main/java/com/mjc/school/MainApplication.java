@@ -1,5 +1,16 @@
-//package com.mjc.school;
-//
+package com.mjc.school;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MainApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+
+    }
+}
+
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 //import org.springframework.context.annotation.ComponentScan;
