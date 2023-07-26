@@ -1,5 +1,6 @@
 package com.mjc.school.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,9 @@ import java.time.format.DateTimeFormatter;
 public class AuthorResponseDto {
     private Long id;
     private String name;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime createDate;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime lastUpdateDate;
 
     @Override
