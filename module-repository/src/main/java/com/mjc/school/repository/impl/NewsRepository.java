@@ -7,14 +7,10 @@ import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
 import com.mjc.school.repository.utils.JPAUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.ObjectUtils;
 
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
@@ -124,7 +120,7 @@ public class NewsRepository implements BaseRepository<News, Long>, ExtendedRepos
             List<Predicate> predicates = new ArrayList<>();
 
             if (tagName != null || tagsIds != null) {
-                Join<Tag, News> newsTags = root.join("tags");
+                Join<Tag, News> newsTags = root.join("newsTags");
                 if (tagName != null) {
                     predicates.add(newsTags.get("name").in(tagName));
                 }
