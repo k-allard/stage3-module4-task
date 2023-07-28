@@ -13,13 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -27,42 +23,24 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "news")
-public class News implements BaseEntity<Long> {
+@Table(name = "comments")
+public class Comment implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title")
-    private String title;
     @Column(name = "content")
     private String content;
     @Column(name = "create_date")
     private LocalDateTime createDate;
-    @Column(name = "last_update_date", nullable = false,
-            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "last_update_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime lastUpdateDate;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.REFRESH, CascadeType.DETACH},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
-    private Author author;
+    @JoinColumn(name = "news_id")
+    private News news;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH},
-            fetch = FetchType.LAZY)
-    @JoinTable(name = "tag_news",
-            joinColumns = @JoinColumn(name = "news_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> newsTags;
-
-    @OneToMany(cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.REFRESH, CascadeType.DETACH},
-            mappedBy = "news")
-    private List<Comment> comments;
-
-    public News(Long id) {
+    public Comment(Long id) {
         this.id = id;
     }
 
@@ -72,8 +50,8 @@ public class News implements BaseEntity<Long> {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        News news = (News) o;
-        return id.equals(news.id);
+        Comment comment = (Comment) o;
+        return id.equals(comment.id);
     }
 
     @Override
