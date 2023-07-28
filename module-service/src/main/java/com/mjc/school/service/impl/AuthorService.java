@@ -40,6 +40,15 @@ public class AuthorService implements BaseService<ServiceAuthorRequestDto, Servi
     }
 
     @Override
+    public List<ServiceAuthorResponseDto> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        List<ServiceAuthorResponseDto> serviceAuthorResponseDtoList = new ArrayList<>();
+        for (Author author : authorRepository.readAll(pageNumber, pageSize, sortBy)) {
+            serviceAuthorResponseDtoList.add(mapper.mapModelToResponseDto(author));
+        }
+        return serviceAuthorResponseDtoList;
+    }
+
+    @Override
     @ValidateInput
     public ServiceAuthorResponseDto readById(Long id) {
         Author author = authorRepository.readById(id).get();

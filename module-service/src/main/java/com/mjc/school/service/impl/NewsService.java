@@ -60,6 +60,16 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
     }
 
     @Override
+    public List<ServiceNewsResponseDto> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        List<ServiceNewsResponseDto> newsDtoList = new ArrayList<>();
+        for (News news : newsRepository.readAll(pageNumber, pageSize, sortBy)) {
+            ServiceNewsResponseDto newsResponseDto = newsMapper.mapModelToResponseDto(news);
+            newsDtoList.add(newsResponseDto);
+        }
+        return newsDtoList;
+    }
+
+    @Override
     @ValidateInput
     public ServiceNewsResponseDto readById(Long id) {
         News news = newsRepository.readById(id).get();

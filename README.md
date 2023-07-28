@@ -42,8 +42,8 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
 
 - [x] Create News - fill only title, content, authorId, tag ids (optional) in news dto request and return created news,
   as dto response, http response status - 201.
-- [ ] Create Author - fill only name in author dto request and return created author, as dto response, http response status - 201.
-- [ ] Create Tag - fill only name in tag dto request and return created tag as dto response, http response status - 201.
+- [x] Create Author - fill only name in author dto request and return created author, as dto response, http response status - 201.
+- [x] Create Tag - fill only name in tag dto request and return created tag as dto response, http response status - 201.
 - [ ] Create Comment - fill only content and newsId in comment dto request and return created comment as dto response,
   http response status - 201.
 

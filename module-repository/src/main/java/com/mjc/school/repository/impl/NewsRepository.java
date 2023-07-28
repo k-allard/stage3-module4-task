@@ -40,6 +40,23 @@ public class NewsRepository implements BaseRepository<News, Long>, ExtendedRepos
     }
 
     @Override
+    public List<News> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        AtomicReference<List<News>> resultList = new AtomicReference<>();
+        jpaUtils.doInSessionWithTransaction(session -> {
+            StringBuilder queryString = new StringBuilder("select n from News n");
+            if (sortBy != null)
+                queryString.append(" order by ").append(sortBy);
+            resultList.set(
+                    session.createQuery(queryString.toString(), News.class)
+                            .setFirstResult((pageNumber - 1) * pageSize)
+                            .setMaxResults(pageSize)
+                            .getResultList()
+            );
+        });
+        return resultList.get();
+    }
+
+    @Override
     public Optional<News> readById(Long id) {
         AtomicReference<Optional<News>> result = new AtomicReference<>();
         jpaUtils.doInSessionWithTransaction(session ->

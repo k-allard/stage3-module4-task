@@ -1,7 +1,6 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
-import com.mjc.school.controller.CommandHandler;
 import com.mjc.school.controller.ExtendedController;
 import com.mjc.school.controller.dto.AuthorResponseDto;
 import com.mjc.school.controller.dto.NewsRequestDto;
@@ -16,7 +15,6 @@ import com.mjc.school.service.dto.ServiceTagDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -37,6 +35,21 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
         this.extendedService = extendedService;
     }
 
+
+    @Override
+    @GetMapping(value = "/news", params = {"pageNumber"})
+    public List<NewsResponseDto> readAll(
+            @RequestParam Integer pageNumber,
+            @RequestParam(required = false, defaultValue = "3") Integer pageSize,
+            @RequestParam(required = false) String sortBy) {
+        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
+        for (ServiceNewsResponseDto serviceDto : newsService.readAll(pageNumber, pageSize, sortBy)) {
+            newsResponseDtoList.add(mapper.mapServiceNewsResponseDto(serviceDto));
+        }
+        return newsResponseDtoList;
+    }
+
+    @Override
     public List<NewsResponseDto> readAll() {
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
         for (ServiceNewsResponseDto serviceDto : newsService.readAll()) {

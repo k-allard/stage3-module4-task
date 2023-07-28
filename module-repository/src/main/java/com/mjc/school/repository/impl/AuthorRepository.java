@@ -30,6 +30,23 @@ public class AuthorRepository implements BaseRepository<Author, Long> {
     }
 
     @Override
+    public List<Author> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        AtomicReference<List<Author>> resultList = new AtomicReference<>();
+        jpaUtils.doInSessionWithTransaction(session -> {
+            StringBuilder queryString = new StringBuilder("select a from Author a");
+            if (sortBy != null)
+                queryString.append(" order by ").append(sortBy);
+            resultList.set(
+                    session.createQuery(queryString.toString(), Author.class)
+                            .setFirstResult((pageNumber - 1) * pageSize)
+                            .setMaxResults(pageSize)
+                            .getResultList()
+            );
+        });
+        return resultList.get();
+    }
+
+    @Override
     public Optional<Author> readById(Long id) {
         if (id == null)
             return Optional.empty();

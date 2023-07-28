@@ -1,20 +1,19 @@
 package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
-import com.mjc.school.controller.CommandHandler;
 import com.mjc.school.controller.dto.TagDto;
 import com.mjc.school.controller.mapper.ServiceToWebDTOMapper;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceTagDto;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +36,18 @@ public class TagController implements BaseController<TagDto, TagDto, Long> {
     public List<TagDto> readAll() {
         List<TagDto> authorResponseDtoList = new ArrayList<>();
         for (ServiceTagDto serviceTagDto : tagService.readAll()) {
+            authorResponseDtoList.add(mapper.mapServiceTagDto(serviceTagDto));
+        }
+        return authorResponseDtoList;
+    }
+
+    @Override
+    @GetMapping(value = "/tags", params = "pageNumber")
+    public List<TagDto> readAll(@RequestParam Integer pageNumber,
+                                @RequestParam(required = false, defaultValue = "3") Integer pageSize,
+                                @RequestParam(required = false) String sortBy) {
+        List<TagDto> authorResponseDtoList = new ArrayList<>();
+        for (ServiceTagDto serviceTagDto : tagService.readAll(pageNumber, pageSize, sortBy)) {
             authorResponseDtoList.add(mapper.mapServiceTagDto(serviceTagDto));
         }
         return authorResponseDtoList;

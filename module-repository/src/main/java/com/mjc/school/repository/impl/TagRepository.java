@@ -30,6 +30,23 @@ public class TagRepository implements BaseRepository<Tag, Long> {
     }
 
     @Override
+    public List<Tag> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        AtomicReference<List<Tag>> resultList = new AtomicReference<>();
+        jpaUtils.doInSessionWithTransaction(session -> {
+            StringBuilder queryString = new StringBuilder("select n from Tag n");
+            if (sortBy != null)
+                queryString.append(" order by ").append(sortBy);
+            resultList.set(
+                    session.createQuery(queryString.toString(), Tag.class)
+                            .setFirstResult((pageNumber - 1) * pageSize)
+                            .setMaxResults(pageSize)
+                            .getResultList()
+            );
+        });
+        return resultList.get();
+    }
+
+    @Override
     public Optional<Tag> readById(Long id) {
         AtomicReference<Optional<Tag>> result = new AtomicReference<>();
         jpaUtils.doInSessionWithTransaction(session ->

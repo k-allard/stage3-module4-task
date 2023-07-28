@@ -41,6 +41,15 @@ public class TagService implements BaseService<ServiceTagDto, ServiceTagDto, Lon
     }
 
     @Override
+    public List<ServiceTagDto> readAll(Integer pageNumber, Integer pageSize, String sortBy) {
+        List<ServiceTagDto> tagDtoList = new ArrayList<>();
+        for (Tag tag : tagRepository.readAll(pageNumber, pageSize, sortBy)) {
+            tagDtoList.add(mapper.mapModelToServiceDto(tag));
+        }
+        return tagDtoList;
+    }
+
+    @Override
     @ValidateInput
     public ServiceTagDto readById(Long id) {
         Tag tag = tagRepository.readById(id).get();
