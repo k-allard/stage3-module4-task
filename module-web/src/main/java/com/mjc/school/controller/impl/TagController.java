@@ -7,7 +7,15 @@ import com.mjc.school.controller.mapper.ServiceToWebDTOMapper;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceTagDto;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -25,7 +33,7 @@ public class TagController implements BaseController<TagDto, TagDto, Long> {
         this.tagService = tagService;
     }
 
-    @CommandHandler(code = 11)
+    @GetMapping(value = "/tags")
     public List<TagDto> readAll() {
         List<TagDto> authorResponseDtoList = new ArrayList<>();
         for (ServiceTagDto serviceTagDto : tagService.readAll()) {
@@ -34,25 +42,27 @@ public class TagController implements BaseController<TagDto, TagDto, Long> {
         return authorResponseDtoList;
     }
 
-    @CommandHandler(code = 12)
-    public TagDto readById(Long id) {
+    @GetMapping("/tags/{id}")
+    public TagDto readById(@PathVariable Long id) {
         return mapper.mapServiceTagDto(tagService.readById(id));
     }
 
-    @CommandHandler(code = 13)
-    public TagDto create(TagDto tagDto) {
+    @PostMapping("/tags")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TagDto create(@RequestBody TagDto tagDto) {
         return mapper.mapServiceTagDto(
                 tagService.create(mapper.mapTagToServiceDto(tagDto)));
     }
 
-    @CommandHandler(code = 14)
-    public TagDto update(TagDto dtoRequest) {
+    @PutMapping("/tags")
+    public TagDto update(@RequestBody TagDto dtoRequest) {
         return mapper.mapServiceTagDto(
                 tagService.update(mapper.mapTagToServiceDto(dtoRequest)));
     }
 
-    @CommandHandler(code = 15)
-    public boolean deleteById(Long id) {
+    @DeleteMapping("/tags/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public boolean deleteById(@PathVariable Long id) {
         return tagService.deleteById(id);
     }
 }

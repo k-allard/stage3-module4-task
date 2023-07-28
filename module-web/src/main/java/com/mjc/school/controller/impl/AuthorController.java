@@ -9,7 +9,15 @@ import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,7 +35,7 @@ public class AuthorController implements BaseController<AuthorRequestDto, Author
         this.authorService = authorService;
     }
 
-    @CommandHandler(code = 6)
+    @GetMapping(value = "/authors")
     public List<AuthorResponseDto> readAll() {
         List<AuthorResponseDto> authorResponseDtoList = new ArrayList<>();
         for (ServiceAuthorResponseDto responseDto : authorService.readAll()) {
@@ -36,25 +44,27 @@ public class AuthorController implements BaseController<AuthorRequestDto, Author
         return authorResponseDtoList;
     }
 
-    @CommandHandler(code = 7)
-    public AuthorResponseDto readById(Long newsId) {
-        return mapper.mapServiceAuthorResponseDto(authorService.readById(newsId));
+    @GetMapping("/authors/{id}")
+    public AuthorResponseDto readById(@PathVariable Long id) {
+        return mapper.mapServiceAuthorResponseDto(authorService.readById(id));
     }
 
-    @CommandHandler(code = 8)
-    public AuthorResponseDto create(AuthorRequestDto dtoRequest) {
+    @PostMapping("/authors")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthorResponseDto create(@RequestBody AuthorRequestDto dtoRequest) {
         return mapper.mapServiceAuthorResponseDto(
                 authorService.create(mapper.mapAuthorRequestDto(dtoRequest)));
     }
 
-    @CommandHandler(code = 9)
-    public AuthorResponseDto update(AuthorRequestDto dtoRequest) {
+    @PutMapping("/authors")
+    public AuthorResponseDto update(@RequestBody AuthorRequestDto dtoRequest) {
         return mapper.mapServiceAuthorResponseDto(
                 authorService.update(mapper.mapAuthorRequestDto(dtoRequest)));
     }
 
-    @CommandHandler(code = 10)
-    public boolean deleteById(Long newsId) {
-        return authorService.deleteById(newsId);
+    @DeleteMapping("/authors/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public boolean deleteById(@PathVariable Long id) {
+        return authorService.deleteById(id);
     }
 }

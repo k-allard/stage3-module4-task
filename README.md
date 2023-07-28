@@ -10,7 +10,7 @@ The recommended timeline for the whole module is 2 weeks.
 
 - [ ] Add Comment entity with fields Id, Content(should have length from 5 to 255), NewsId, Created, Modified.
 - [ ] Implement REST controllers for Author, News, Tag and Comment entities.
-- [ ] Implement exception handler for REST controllers. Use @ControllerAdvice annotation.
+- [x] Implement exception handler for REST controllers. Use @ControllerAdvice annotation.
 - [ ] The REST controllers should support of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for above mentioned objects.
 - [ ] The REST controller methods should:
   - [ ] Support retrieval of collection of authors, tags, news and comments using search criteria, pagination and sorting.
