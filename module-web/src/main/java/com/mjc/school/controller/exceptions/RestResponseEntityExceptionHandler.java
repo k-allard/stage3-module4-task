@@ -13,9 +13,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {ValidatorException.class, NotFoundException.class})
-    protected ResponseEntity<Object> handleValidatorException(RuntimeException ex, WebRequest request) {
+    @ExceptionHandler(value = {ValidatorException.class})
+    protected ResponseEntity<Object> handleValidatorException(ValidatorException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(),
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {NotFoundException.class})
+    protected ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(),
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 }

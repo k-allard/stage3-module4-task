@@ -112,8 +112,12 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
     @Override
     @ValidateInput
     public ServiceAuthorResponseDto readAuthorByNewsId(Long id) {
+        Author author = newsRepository.readById(id).get().getAuthor();
+        if (author == null) {
+            return new ServiceAuthorResponseDto();
+        }
         Author authorModel = authorRepository.readById(
-                newsRepository.readById(id).get().getAuthor().getId()).get();
+                author.getId()).get();
         return authorMapper.mapModelToResponseDto(authorModel);
     }
 

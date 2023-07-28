@@ -9,6 +9,7 @@ import com.mjc.school.controller.dto.TagDto;
 import com.mjc.school.controller.mapper.ServiceToWebDTOMapper;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.ExtendedService;
+import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
 import com.mjc.school.service.dto.ServiceNewsResponseDto;
 import com.mjc.school.service.dto.ServiceTagDto;
@@ -85,7 +86,11 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
 
     @GetMapping("/news/{id}/author")
     public AuthorResponseDto readAuthorByNewsId(@PathVariable Long id) {
-        return mapper.mapServiceAuthorResponseDto(extendedService.readAuthorByNewsId(id));
+        ServiceAuthorResponseDto responseDto = extendedService.readAuthorByNewsId(id);
+        AuthorResponseDto response = null;
+        if (responseDto.getId() != null)
+            response = mapper.mapServiceAuthorResponseDto(responseDto);
+        return response;
     }
 
     @GetMapping("/news/{id}/tags")
