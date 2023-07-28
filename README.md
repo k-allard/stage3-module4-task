@@ -71,7 +71,7 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
 - [x] Get Author by news id – return author as dto by provided news id, http response status - 200.
 - [x] Get Tags by news id – return tags as list of dtos by provided news id, http response status - 200.
 - [ ] Get Comments by news id – return comments as list of dtos by provided news id, http response status - 200.
-- [ ] Get News by tag names, tag ids, author name, title, content (all params are optional and can be used in
+- [x] Get News by tag names, tag ids, author name, title, content (all params are optional and can be used in
   conjunction) – return news by provided params, http response status - 200. [optional].
 
 All returned and received data should be like [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) type.
