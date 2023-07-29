@@ -2,10 +2,14 @@ package com.mjc.school.controller.mapper;
 
 import com.mjc.school.controller.dto.AuthorRequestDto;
 import com.mjc.school.controller.dto.AuthorResponseDto;
+import com.mjc.school.controller.dto.CommentRequestDto;
+import com.mjc.school.controller.dto.CommentResponseDto;
 import com.mjc.school.controller.dto.NewsRequestDto;
 import com.mjc.school.controller.dto.NewsResponseDto;
 import com.mjc.school.controller.dto.TagDto;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
+import com.mjc.school.service.dto.ServiceCommentRequestDto;
+import com.mjc.school.service.dto.ServiceCommentResponseDto;
 import com.mjc.school.service.dto.ServiceTagDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
@@ -41,5 +45,13 @@ public class ServiceToWebDTOMapper {
 
     public ServiceTagDto mapTagToServiceDto(TagDto tagDto) {
         return mapper.map(tagDto, ServiceTagDto.class);
+    }
+
+    public CommentResponseDto mapServiceCommentResponseDto(ServiceCommentResponseDto responseDto) {
+        return mapper.map(responseDto, CommentResponseDto.class);
+    }
+
+    public ServiceCommentRequestDto mapCommentRequestDto(CommentRequestDto dtoRequest) {
+        return mapper.map(dtoRequest, ServiceCommentRequestDto.class);
     }
 }

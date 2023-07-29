@@ -2,7 +2,6 @@ package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.Author;
-import com.mjc.school.repository.model.News;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
@@ -21,13 +20,8 @@ public class AuthorService implements BaseService<ServiceAuthorRequestDto, Servi
 
     private final BaseRepository<Author, Long> authorRepository;
 
-    private final BaseRepository<News, Long> newsRepository;
-
-
-    public AuthorService(BaseRepository<Author, Long> authorRepository,
-                         BaseRepository<News, Long> newsRepository) {
+    public AuthorService(BaseRepository<Author, Long> authorRepository) {
         this.authorRepository = authorRepository;
-        this.newsRepository = newsRepository;
     }
 
     @Override

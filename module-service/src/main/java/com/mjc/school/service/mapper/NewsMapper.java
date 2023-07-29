@@ -16,7 +16,6 @@ import java.util.List;
 public class NewsMapper {
 
     private final BaseRepository<Author, Long> authorRepository;
-
     private final BaseRepository<Tag, Long> tagRepository;
     private final ModelMapper mapper = new ModelMapper();
 
