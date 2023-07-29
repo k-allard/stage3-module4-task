@@ -1,8 +1,8 @@
 package com.mjc.school.service;
 
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
-import com.mjc.school.service.dto.ServiceTagDto;
 import com.mjc.school.service.dto.ServiceNewsResponseDto;
+import com.mjc.school.service.dto.ServiceTagDto;
 
 import java.util.List;
 

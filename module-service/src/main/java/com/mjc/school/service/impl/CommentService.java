@@ -19,6 +19,7 @@ public class CommentService implements BaseService<ServiceCommentRequestDto, Ser
 
     private final BaseRepository<Comment, Long> commentRepository;
     private final CommentMapper commentMapper;
+
     public CommentService(@Qualifier("commentRepository")
                           BaseRepository<Comment, Long> commentRepository,
                           CommentMapper commentMapper) {

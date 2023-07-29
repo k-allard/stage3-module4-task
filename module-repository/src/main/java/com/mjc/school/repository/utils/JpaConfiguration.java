@@ -21,23 +21,6 @@ public class JpaConfiguration {
     public static final String DB_PASSWORD = "";
     private static final String DB_DRIVER = "org.h2.Driver";
 
-    @Bean
-    @Primary
-    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(false);
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource(dataSource());
-        factory.setPackagesToScan("com.mjc.school.repository");
-        factory.setJpaProperties(getHibernateProperties());
-        factory.setJpaVendorAdapter(vendorAdapter);
-
-        MigrationsExecutorFlyway flyway = new MigrationsExecutorFlyway(DB_URL, DB_USERNAME, DB_PASSWORD);
-        flyway.executeMigrations();
-
-        return factory;
-    }
-
     private static Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
 //        hibernateProperties.setProperty(
@@ -55,5 +38,22 @@ public class JpaConfiguration {
         dataSourceBuilder.username(DB_USERNAME);
         dataSourceBuilder.password(DB_PASSWORD);
         return dataSourceBuilder.build();
+    }
+
+    @Bean
+    @Primary
+    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setGenerateDdl(false);
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setDataSource(dataSource());
+        factory.setPackagesToScan("com.mjc.school.repository");
+        factory.setJpaProperties(getHibernateProperties());
+        factory.setJpaVendorAdapter(vendorAdapter);
+
+        MigrationsExecutorFlyway flyway = new MigrationsExecutorFlyway(DB_URL, DB_USERNAME, DB_PASSWORD);
+        flyway.executeMigrations();
+
+        return factory;
     }
 }
