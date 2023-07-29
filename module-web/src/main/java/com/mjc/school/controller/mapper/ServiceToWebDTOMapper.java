@@ -8,12 +8,12 @@ import com.mjc.school.controller.dto.NewsRequestDto;
 import com.mjc.school.controller.dto.NewsResponseDto;
 import com.mjc.school.controller.dto.TagDto;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
+import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import com.mjc.school.service.dto.ServiceCommentRequestDto;
 import com.mjc.school.service.dto.ServiceCommentResponseDto;
-import com.mjc.school.service.dto.ServiceTagDto;
-import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
 import com.mjc.school.service.dto.ServiceNewsResponseDto;
+import com.mjc.school.service.dto.ServiceTagDto;
 import org.modelmapper.ModelMapper;
 
 public class ServiceToWebDTOMapper {

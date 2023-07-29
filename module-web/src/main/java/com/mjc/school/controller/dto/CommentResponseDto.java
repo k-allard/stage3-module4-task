@@ -16,9 +16,9 @@ import java.time.format.DateTimeFormatter;
 public class CommentResponseDto {
     private Long id;
     private String content;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime createDate;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime lastUpdateDate;
     private Long newsId;
 

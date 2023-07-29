@@ -46,8 +46,8 @@ public class CommentController implements BaseController<CommentRequestDto, Comm
     @Override
     @GetMapping(value = "/comments", params = "pageNumber")
     public List<CommentResponseDto> readAll(@RequestParam Integer pageNumber,
-                                           @RequestParam(required = false, defaultValue = "3") Integer pageSize,
-                                           @RequestParam(required = false) String sortBy) {
+                                            @RequestParam(required = false, defaultValue = "3") Integer pageSize,
+                                            @RequestParam(required = false) String sortBy) {
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
         for (ServiceCommentResponseDto responseDto : commentService.readAll(pageNumber, pageSize, sortBy)) {
             commentResponseDtoList.add(mapper.mapServiceCommentResponseDto(responseDto));
