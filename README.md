@@ -47,26 +47,26 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
 - [ ] Create Comment - fill only content and newsId in comment dto request and return created comment as dto response,
   http response status - 201.
 
-- [ ] Get All News – return list of news dtos using search criteria, pagination and sorting, http response status - 200.
-- [ ] Get All Authors – return list of authors dtos using search criteria, pagination and sorting, http response status - 200.
-- [ ] Get All Tags – return list of tag dtos using search criteria, pagination and sorting, http response status - 200.
-- [ ] Get All Comments – return list of comment dtos using search criteria, pagination and sorting, http response status - 200.
+- [x] Get All News – return list of news dtos using search criteria, pagination and sorting, http response status - 200.
+- [x] Get All Authors – return list of authors dtos using search criteria, pagination and sorting, http response status - 200.
+- [x] Get All Tags – return list of tag dtos using search criteria, pagination and sorting, http response status - 200.
+- [x] Get All Comments – return list of comment dtos using search criteria, pagination and sorting, http response status - 200.
 
-- [ ] Get News by id – return news by provided id, http response status - 200.
-- [ ] Get Author by id – return author by provided id, http response status - 200.
-- [ ] Get Tag by id – return tag by provided id, http response status - 200.
-- [ ] Get Comment by id – return comment by provided id, http response status - 200.
+- [x] Get News by id – return news by provided id, http response status - 200.
+- [x] Get Author by id – return author by provided id, http response status - 200.
+- [x] Get Tag by id – return tag by provided id, http response status - 200.
+- [x] Get Comment by id – return comment by provided id, http response status - 200.
 
 - [x] Update News – update only title, content, authorId, tag ids [tag ids are optional] by provided news id and return updated
   news as dto, http response status - 200.
-- [ ] Update Author – update only name by provided author id and return updated author as dto, http response status - 200.
-- [ ] Update Tag – update only name by provided tag id and return updated tag as dto, http response status - 200.
+- [x] Update Author – update only name by provided author id and return updated author as dto, http response status - 200.
+- [x] Update Tag – update only name by provided tag id and return updated tag as dto, http response status - 200.
 - [ ] Update Comment – update only content by provided comment id and return updated comment as dto, http response status - 200.
 
 - [x] Delete News – delete news by provided news id and return no value, http response status - 204.
-- [ ] Delete Author – delete author by provided author id and return no value, http response status - 204.
-- [ ] Delete Tag – delete tag by provided tag id and return no value, http response status - 204.
-- [ ] Delete Comment – delete comment by provided comment id and return no value, http response status - 204.
+- [x] Delete Author – delete author by provided author id and return no value, http response status - 204.
+- [x] Delete Tag – delete tag by provided tag id and return no value, http response status - 204.
+- [x] Delete Comment – delete comment by provided comment id and return no value, http response status - 204.
 
 - [x] Get Author by news id – return author as dto by provided news id, http response status - 200.
 - [x] Get Tags by news id – return tags as list of dtos by provided news id, http response status - 200.

@@ -68,6 +68,7 @@ public class CommentController implements BaseController<CommentRequestDto, Comm
     }
 
     @PutMapping("/comments")
+    //TODO newsId cannot be updated
     public CommentResponseDto update(@RequestBody CommentRequestDto dtoRequest) {
         return mapper.mapServiceCommentResponseDto(
                 commentService.update(mapper.mapCommentRequestDto(dtoRequest)));
