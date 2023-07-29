@@ -22,6 +22,7 @@ public class ValidationAspect {
     private final AuthorRequestDtoValidator authorValidator;
     private final TagDtoValidator tagValidator;
     CommentRequestDtoValidator commentValidator;
+
     public ValidationAspect(NewsRequestDtoValidator newsValidator,
                             AuthorRequestDtoValidator authorValidator,
                             TagDtoValidator tagValidator,
@@ -62,8 +63,7 @@ public class ValidationAspect {
             else if (className.contains("NewsService")) {
                 log.debug("Invoking NewsValidator. . .");
                 newsValidator.validateNewsId(id);
-            }
-            else if (className.contains("TagService"))
+            } else if (className.contains("TagService"))
                 tagValidator.validateTagId(id);
             else {
                 log.error("@ValidateInput does not know how to validate IDs in "
