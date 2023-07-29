@@ -1,6 +1,7 @@
 package com.mjc.school.service.validator;
 
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
+import com.mjc.school.service.dto.ServiceCommentRequestDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
 import com.mjc.school.service.dto.ServiceTagDto;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,15 @@ public class ValidationAspect {
 
     private final AuthorRequestDtoValidator authorValidator;
     private final TagDtoValidator tagValidator;
-
+    CommentRequestDtoValidator commentValidator;
     public ValidationAspect(NewsRequestDtoValidator newsValidator,
                             AuthorRequestDtoValidator authorValidator,
-                            TagDtoValidator tagValidator) {
+                            TagDtoValidator tagValidator,
+                            CommentRequestDtoValidator commentValidator) {
         this.newsValidator = newsValidator;
         this.authorValidator = authorValidator;
         this.tagValidator = tagValidator;
+        this.commentValidator = commentValidator;
     }
 
     @Before(value = "@annotation(com.mjc.school.service.validator.annotations.ValidateInput)")
@@ -77,6 +80,12 @@ public class ValidationAspect {
             tagValidator.validateTagDTO(tag);
             if (joinPoint.getSignature().getName().equals("update")) {
                 tagValidator.validateTagId(tag.getId());
+            }
+        } else if (requestObject[0] instanceof ServiceCommentRequestDto comment) {
+            log.debug("Started executing validateInput advice for ServiceTagDto parameter");
+            commentValidator.validateCommentDTO(comment);
+            if (joinPoint.getSignature().getName().equals("update")) {
+                commentValidator.validateCommentId(comment.getId());
             }
         } else {
             log.warn("@ValidateInput annotation does not support validation for parameter of "
