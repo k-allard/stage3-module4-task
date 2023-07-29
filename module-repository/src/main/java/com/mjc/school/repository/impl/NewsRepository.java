@@ -3,6 +3,7 @@ package com.mjc.school.repository.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.ExtendedRepository;
 import com.mjc.school.repository.model.Author;
+import com.mjc.school.repository.model.Comment;
 import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
 import com.mjc.school.repository.utils.JPAUtils;
@@ -168,6 +169,17 @@ public class NewsRepository implements BaseRepository<News, Long>, ExtendedRepos
             List<Tag> newsTags = session.find(News.class, newsId).getNewsTags();
             newsTags.size();
             result.set(newsTags);
+        });
+        return result.get();
+    }
+
+    @Override
+    public List<Comment> getCommentsByNewsId(Long newsId) {
+        AtomicReference<List<Comment>> result = new AtomicReference<>();
+        jpaUtils.doInSessionWithTransaction(session -> {
+            List<Comment> comments = session.find(News.class, newsId).getComments();
+            comments.size();
+            result.set(comments);
         });
         return result.get();
     }

@@ -3,6 +3,7 @@ package com.mjc.school.controller.impl;
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.ExtendedController;
 import com.mjc.school.controller.dto.AuthorResponseDto;
+import com.mjc.school.controller.dto.CommentResponseDto;
 import com.mjc.school.controller.dto.NewsRequestDto;
 import com.mjc.school.controller.dto.NewsResponseDto;
 import com.mjc.school.controller.dto.TagDto;
@@ -10,6 +11,7 @@ import com.mjc.school.controller.mapper.ServiceToWebDTOMapper;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.ExtendedService;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
+import com.mjc.school.service.dto.ServiceCommentResponseDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
 import com.mjc.school.service.dto.ServiceNewsResponseDto;
 import com.mjc.school.service.dto.ServiceTagDto;
@@ -109,6 +111,17 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
             tagsList.add(mapper.mapServiceTagDto(tag));
         }
         return tagsList;
+    }
+
+    @Override
+    @GetMapping("/news/{id}/comments")
+    public List<CommentResponseDto> readCommentsByNewsId(@PathVariable Long id) {
+        List<ServiceCommentResponseDto> commentServiceDtos = extendedService.readCommentsByNewsId(id);
+        List<CommentResponseDto> commentDtos = new ArrayList<>();
+        for (ServiceCommentResponseDto comment : commentServiceDtos) {
+            commentDtos.add(mapper.mapServiceCommentResponseDto(comment));
+        }
+        return commentDtos;
     }
 
     @GetMapping(value = "/news")

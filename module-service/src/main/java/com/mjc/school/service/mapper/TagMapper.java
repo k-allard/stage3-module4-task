@@ -3,7 +3,9 @@ package com.mjc.school.service.mapper;
 import com.mjc.school.repository.model.Tag;
 import com.mjc.school.service.dto.ServiceTagDto;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TagMapper {
     private final ModelMapper mapper = new ModelMapper();
 

@@ -4,7 +4,9 @@ import com.mjc.school.repository.model.Author;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorMapper {
     private final ModelMapper mapper = new ModelMapper();
 

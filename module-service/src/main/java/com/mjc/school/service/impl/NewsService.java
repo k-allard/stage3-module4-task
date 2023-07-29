@@ -3,15 +3,18 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.ExtendedRepository;
 import com.mjc.school.repository.model.Author;
+import com.mjc.school.repository.model.Comment;
 import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.Tag;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.ExtendedService;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
+import com.mjc.school.service.dto.ServiceCommentResponseDto;
 import com.mjc.school.service.dto.ServiceNewsRequestDto;
 import com.mjc.school.service.dto.ServiceNewsResponseDto;
 import com.mjc.school.service.dto.ServiceTagDto;
 import com.mjc.school.service.mapper.AuthorMapper;
+import com.mjc.school.service.mapper.CommentMapper;
 import com.mjc.school.service.mapper.NewsMapper;
 import com.mjc.school.service.mapper.TagMapper;
 import com.mjc.school.service.validator.annotations.ValidateInput;
@@ -27,9 +30,11 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
 
     private final NewsMapper newsMapper;
 
-    private final AuthorMapper authorMapper = new AuthorMapper();
+    private final AuthorMapper authorMapper;
 
-    private final TagMapper tagMapper = new TagMapper();
+    private final TagMapper tagMapper;
+
+    private final CommentMapper commentMapper;
 
     private final BaseRepository<News, Long> newsRepository;
 
@@ -40,12 +45,16 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
     public NewsService(@Qualifier("newsRepository")
                        BaseRepository<News, Long> newsRepository,
                        ExtendedRepository extendedRepository,
-                       NewsMapper newsMapper,
+                       NewsMapper newsMapper, AuthorMapper authorMapper,
+                       TagMapper tagMapper, CommentMapper commentMapper,
                        @Qualifier("authorRepository")
                        BaseRepository<Author, Long> authorRepository) {
         this.newsMapper = newsMapper;
         this.newsRepository = newsRepository;
         this.extendedRepository = extendedRepository;
+        this.authorMapper = authorMapper;
+        this.tagMapper = tagMapper;
+        this.commentMapper = commentMapper;
         this.authorRepository = authorRepository;
     }
 
@@ -129,6 +138,15 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
             tagDtos.add(tagMapper.mapModelToServiceDto(tag));
         }
         return tagDtos;
+    }
+
+    @Override
+    public List<ServiceCommentResponseDto> readCommentsByNewsId(Long id) {
+        List<ServiceCommentResponseDto> commentsDtos = new ArrayList<>();
+        for (Comment comment : extendedRepository.getCommentsByNewsId(id)) {
+            commentsDtos.add(commentMapper.mapModelToResponseDto(comment));
+        }
+        return commentsDtos;
     }
 
     @Override

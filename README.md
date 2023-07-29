@@ -8,24 +8,24 @@ The recommended timeline for the whole module is 2 weeks.
 
 #### Business requirements
 
-- [ ] Add Comment entity with fields Id, Content(should have length from 5 to 255), NewsId, Created, Modified.
-- [ ] Implement REST controllers for Author, News, Tag and Comment entities.
+- [x] Add Comment entity with fields Id, Content(should have length from 5 to 255), NewsId, Created, Modified.
+- [x] Implement REST controllers for Author, News, Tag and Comment entities.
 - [x] Implement exception handler for REST controllers. Use @ControllerAdvice annotation.
-- [ ] The REST controllers should support of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for above mentioned objects.
+- [x] The REST controllers should support of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for above mentioned objects.
 - [ ] The REST controller methods should:
-  - [ ] Support retrieval of collection of authors, tags, news and comments using search criteria, pagination and sorting.
-  - [ ] Support retrieval of author, tag, news and comment by id.
-  - [ ] Support creation of author, tag, news and comment.
-  - [ ] Support modification of author, tag, news and comment.
+  - [x] Support retrieval of collection of authors, tags, news and comments using search criteria, pagination and sorting.
+  - [x] Support retrieval of author, tag, news and comment by id.
+  - [x] Support creation of author, tag, news and comment.
+  - [x] Support modification of author, tag, news and comment.
   - [ ] Support partial modification of author, tag, news and comment using PATCH HTTP Verb.
-  - [ ] Support deletion of author, tag, news and comment by id.
-  - [ ] Support retrieval of author by news id.
-  - [ ] Support retrieval of tags by news id.
-  - [ ] Support retrieval of comments by news id.
-  - [ ] Support retrieval of news by tag names, tag ids, author name, title, content (all params are optional and can be used
+  - [x] Support deletion of author, tag, news and comment by id.
+  - [x] Support retrieval of author by news id.
+  - [x] Support retrieval of tags by news id.
+  - [x] Support retrieval of comments by news id.
+  - [x] Support retrieval of news by tag names, tag ids, author name, title, content (all params are optional and can be used
     in conjunction) [optional].
 - [ ] Use versioning of REST controllers and their methods [optional].
-- [ ] Use Data transfer objects DTO as input parameters (requests) and output result (response).
+- [x] Use Data transfer objects DTO as input parameters (requests) and output result (response).
 - [ ] Validate input parameters (requests) of REST controller methods.
 
 #### Prerequisites
