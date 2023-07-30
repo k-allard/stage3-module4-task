@@ -62,8 +62,9 @@ public class CommentService implements BaseService<ServiceCommentRequestDto, Ser
                         LocalDateTime.now(),
                         LocalDateTime.now(),
                         serviceCommentRequestDto.getNewsId());
+        Comment comment = commentMapper.mapResponseDtoToModel(newComment);
         return commentMapper.mapModelToResponseDto(commentRepository.create(
-                commentMapper.mapResponseDtoToModel(newComment)
+                comment
         ));
     }
 

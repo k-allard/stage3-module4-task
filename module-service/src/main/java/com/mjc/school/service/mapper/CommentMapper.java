@@ -21,8 +21,10 @@ public class CommentMapper {
         return mapper.map(comment, ServiceCommentResponseDto.class);
     }
 
-    public Comment mapResponseDtoToModel(ServiceCommentResponseDto newComment) {
-        return mapper.map(newComment, Comment.class);
+    public Comment mapResponseDtoToModel(ServiceCommentResponseDto commentDto) {
+        Comment commentModel = mapper.map(commentDto, Comment.class);
+        commentModel.setNews(newsRepository.readById(commentDto.getNewsId()).get());
+        return commentModel;
     }
 
     public Comment mapRequestDtoToModel(ServiceCommentRequestDto commentRequestDto) {

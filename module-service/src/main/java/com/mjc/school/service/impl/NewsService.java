@@ -141,6 +141,7 @@ public class NewsService implements BaseService<ServiceNewsRequestDto, ServiceNe
     }
 
     @Override
+    @ValidateInput
     public List<ServiceCommentResponseDto> readCommentsByNewsId(Long id) {
         List<ServiceCommentResponseDto> commentsDtos = new ArrayList<>();
         for (Comment comment : extendedRepository.getCommentsByNewsId(id)) {
