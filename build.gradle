@@ -28,11 +28,11 @@ subprojects {
 //        testImplementation "org.springframework:spring-test:$springVersion"
 //        testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
 //        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
-//        testImplementation "com.tngtech.archunit:archunit-junit5:$archUnitVersion"
-//        testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
+        testImplementation "com.tngtech.archunit:archunit-junit5:$archUnitVersion"
+        testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
 //        // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
 //        implementation 'javax.servlet:javax.servlet-api:4.0.1'
-//        testImplementation 'javax.servlet:javax.servlet-api:4.0.1'
+        testImplementation 'javax.servlet:javax.servlet-api:4.0.1'
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
         testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.2'
         testImplementation 'io.rest-assured:rest-assured:5.3.1'
