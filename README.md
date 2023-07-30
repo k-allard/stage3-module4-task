@@ -44,7 +44,7 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
   as dto response, http response status - 201.
 - [x] Create Author - fill only name in author dto request and return created author, as dto response, http response status - 201.
 - [x] Create Tag - fill only name in tag dto request and return created tag as dto response, http response status - 201.
-- [ ] Create Comment - fill only content and newsId in comment dto request and return created comment as dto response,
+- [x] Create Comment - fill only content and newsId in comment dto request and return created comment as dto response,
   http response status - 201.
 
 - [x] Get All News – return list of news dtos using search criteria, pagination and sorting, http response status - 200.
@@ -61,7 +61,7 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
   news as dto, http response status - 200.
 - [x] Update Author – update only name by provided author id and return updated author as dto, http response status - 200.
 - [x] Update Tag – update only name by provided tag id and return updated tag as dto, http response status - 200.
-- [ ] Update Comment – update only content by provided comment id and return updated comment as dto, http response status - 200.
+- [x] Update Comment – update only content by provided comment id and return updated comment as dto, http response status - 200.
 
 - [x] Delete News – delete news by provided news id and return no value, http response status - 204.
 - [x] Delete Author – delete author by provided author id and return no value, http response status - 204.
@@ -70,7 +70,7 @@ The system should expose CRUD operations for News, Author, Tag and Comments from
 
 - [x] Get Author by news id – return author as dto by provided news id, http response status - 200.
 - [x] Get Tags by news id – return tags as list of dtos by provided news id, http response status - 200.
-- [ ] Get Comments by news id – return comments as list of dtos by provided news id, http response status - 200.
+- [x] Get Comments by news id – return comments as list of dtos by provided news id, http response status - 200.
 - [x] Get News by tag names, tag ids, author name, title, content (all params are optional and can be used in
   conjunction) – return news by provided params, http response status - 200. [optional].
 

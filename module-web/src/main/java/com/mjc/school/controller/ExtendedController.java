@@ -12,7 +12,6 @@ public interface ExtendedController {
 
     List<TagDto> readTagsByNewsId(Long id);
 
-    //TODO validate that news id exists
     List<CommentResponseDto> readCommentsByNewsId(Long id);
 
     List<NewsResponseDto> readNewsByParams(List<Long> tagsIds, String tagName, String authorName, String title, String content);

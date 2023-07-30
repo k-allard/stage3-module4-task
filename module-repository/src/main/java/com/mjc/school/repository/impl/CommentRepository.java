@@ -57,7 +57,6 @@ public class CommentRepository implements BaseRepository<Comment, Long> {
     }
 
     @Override
-    //TODO Fix PropertyValueException: not-null property references a null or transient value : com.mjc.school.repository.model.News.lastUpdateDate
     public Comment create(Comment newComment) {
         jpaUtils.doInSessionWithTransaction(session -> {
             if (newComment.getNews() != null)
@@ -73,7 +72,7 @@ public class CommentRepository implements BaseRepository<Comment, Long> {
         jpaUtils.doInSessionWithTransaction(session -> {
             Comment commentFromRepo = session.find(Comment.class, comment.getId());
             commentFromRepo.setContent(comment.getContent());
-            commentFromRepo.setNews(session.merge(comment.getNews()));
+//            commentFromRepo.setNews(session.merge(comment.getNews()));
             commentFromRepo.setLastUpdateDate(LocalDateTime.now());
             commentAtomicReference.set(commentFromRepo);
         });
