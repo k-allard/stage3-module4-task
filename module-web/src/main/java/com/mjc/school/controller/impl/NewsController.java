@@ -20,11 +20,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +34,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@RequestMapping(value = ("/news"))
 public class NewsController implements BaseController<NewsRequestDto, NewsResponseDto, Long>, ExtendedController {
     private final BaseService<ServiceNewsRequestDto, ServiceNewsResponseDto, Long> newsService;
     private final ExtendedService extendedService;
@@ -49,9 +50,9 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
 
 
     @Override
-    @GetMapping(value = "/news", params = {"pageNumber"})
+    @GetMapping
     public List<NewsResponseDto> readAll(
-            @RequestParam Integer pageNumber,
+            @RequestParam(required = false) Integer pageNumber,
             @RequestParam(required = false, defaultValue = "3") Integer pageSize,
             @RequestParam(required = false) String sortBy) {
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
@@ -61,44 +62,33 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
         return newsResponseDtoList;
     }
 
-    @Override
-    public List<NewsResponseDto> readAll() {
-        List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
-        for (ServiceNewsResponseDto serviceDto : newsService.readAll()) {
-            newsResponseDtoList.add(mapper.mapServiceNewsResponseDto(serviceDto));
-        }
-        return newsResponseDtoList;
-    }
-
-    @GetMapping("/news/{id}")
+    @GetMapping("/{id}")
     public NewsResponseDto readById(@PathVariable Long id) {
         return mapper.mapServiceNewsResponseDto(
                 newsService.readById(id));
     }
 
-    @PostMapping("/news")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public NewsResponseDto create(@RequestBody NewsRequestDto dtoRequest) {
         return mapper.mapServiceNewsResponseDto(
                 newsService.create(mapper.mapNewsRequestDto(dtoRequest)));
     }
 
-    @RequestMapping(
-            value = "/news",
-            method = {RequestMethod.PUT, RequestMethod.PATCH}
-    )
-    public NewsResponseDto update(@RequestBody NewsRequestDto dtoRequest) {
+    @PatchMapping("/{id}")
+    public NewsResponseDto update(@PathVariable Long id,
+                                  @RequestBody NewsRequestDto dtoRequest) {
         return mapper.mapServiceNewsResponseDto(
                 newsService.update(mapper.mapNewsRequestDto(dtoRequest)));
     }
 
-    @DeleteMapping("/news/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public boolean deleteById(@PathVariable Long id) {
-        return newsService.deleteById(id);
+    public void deleteById(@PathVariable Long id) {
+        newsService.deleteById(id);
     }
 
-    @GetMapping("/news/{id}/author")
+    @GetMapping("/{id}/author")
     public AuthorResponseDto readAuthorByNewsId(@PathVariable Long id) {
         ServiceAuthorResponseDto responseDto = extendedService.readAuthorByNewsId(id);
         AuthorResponseDto response = null;
@@ -107,7 +97,7 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
         return response;
     }
 
-    @GetMapping("/news/{id}/tags")
+    @GetMapping("/{id}/tags")
     public List<TagDto> readTagsByNewsId(@PathVariable Long id) {
         List<ServiceTagDto> serviceTagDtos = extendedService.readTagsByNewsId(id);
         List<TagDto> tagsList = new ArrayList<>();
@@ -118,7 +108,7 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
     }
 
     @Override
-    @GetMapping("/news/{id}/comments")
+    @GetMapping("/{id}/comments")
     public List<CommentResponseDto> readCommentsByNewsId(@PathVariable Long id) {
         List<ServiceCommentResponseDto> commentServiceDtos = extendedService.readCommentsByNewsId(id);
         List<CommentResponseDto> commentDtos = new ArrayList<>();
@@ -128,20 +118,13 @@ public class NewsController implements BaseController<NewsRequestDto, NewsRespon
         return commentDtos;
     }
 
-    @GetMapping(value = "/news")
+    @GetMapping("/with-params")
     public List<NewsResponseDto> readNewsByParams(
             @RequestParam(required = false) List<Long> tagsIds,
             @RequestParam(required = false) String tagName,
             @RequestParam(required = false) String authorName,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String content) {
-        if (tagsIds == null
-                && tagName == null
-                && authorName == null
-                && title == null
-                && content == null) {
-            return readAll();
-        }
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
         for (ServiceNewsResponseDto serviceDto : extendedService.readNewsByParams(
                 tagsIds, tagName, authorName, title, content)) {

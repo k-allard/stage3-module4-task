@@ -65,6 +65,8 @@ public class ValidationAspect {
                 newsValidator.validateNewsId(id);
             } else if (className.contains("TagService"))
                 tagValidator.validateTagId(id);
+            else if (className.contains("CommentService"))
+                commentValidator.validateCommentId(id);
             else {
                 log.error("@ValidateInput does not know how to validate IDs in "
                         + className + " yet\n" + "No validation will be performed");
@@ -82,7 +84,7 @@ public class ValidationAspect {
                 tagValidator.validateTagId(tag.getId());
             }
         } else if (requestObject[0] instanceof ServiceCommentRequestDto comment) {
-            log.debug("Started executing validateInput advice for ServiceTagDto parameter");
+            log.debug("Started executing validateInput advice for ServiceCommentRequestDto parameter");
             commentValidator.validateCommentDTO(comment);
             if (joinPoint.getSignature().getName().equals("update")) {
                 commentValidator.validateCommentId(comment.getId());
