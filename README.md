@@ -12,12 +12,12 @@ The recommended timeline for the whole module is 2 weeks.
 - [x] Implement REST controllers for Author, News, Tag and Comment entities.
 - [x] Implement exception handler for REST controllers. Use @ControllerAdvice annotation.
 - [x] The REST controllers should support of [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations for above mentioned objects.
-- [ ] The REST controller methods should:
+- [x] The REST controller methods should:
   - [x] Support retrieval of collection of authors, tags, news and comments using search criteria, pagination and sorting.
   - [x] Support retrieval of author, tag, news and comment by id.
   - [x] Support creation of author, tag, news and comment.
   - [x] Support modification of author, tag, news and comment.
-  - [ ] Support partial modification of author, tag, news and comment using PATCH HTTP Verb.
+  - [x] Support partial modification of author, tag, news and comment using PATCH HTTP Verb.
   - [x] Support deletion of author, tag, news and comment by id.
   - [x] Support retrieval of author by news id.
   - [x] Support retrieval of tags by news id.
