@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO add hibernate-validator functionality: https://www.baeldung.com/spring-validate-requestparam-pathvariable
+//TODO add versioning of REST controllers and their methods
 @RestController
 @Slf4j
 @RequestMapping(value = ("/news"))
