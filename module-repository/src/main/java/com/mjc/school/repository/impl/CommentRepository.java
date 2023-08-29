@@ -36,12 +36,16 @@ public class CommentRepository implements BaseRepository<Comment, Long> {
             StringBuilder queryString = new StringBuilder("select c from Comment c");
             if (sortBy != null)
                 queryString.append(" order by ").append(sortBy);
-            resultList.set(
-                    session.createQuery(queryString.toString(), Comment.class)
-                            .setFirstResult((pageNumber - 1) * pageSize)
-                            .setMaxResults(pageSize)
-                            .getResultList()
-            );
+            if (pageNumber != null) {
+                resultList.set(
+                        session.createQuery(queryString.toString(), Comment.class)
+                                .setFirstResult((pageNumber - 1) * pageSize)
+                                .setMaxResults(pageSize)
+                                .getResultList());
+            } else {
+                resultList.set(
+                        session.createQuery("select c from Comment c", Comment.class).getResultList());
+            }
         });
         return resultList.get();
     }
@@ -72,7 +76,6 @@ public class CommentRepository implements BaseRepository<Comment, Long> {
         jpaUtils.doInSessionWithTransaction(session -> {
             Comment commentFromRepo = session.find(Comment.class, comment.getId());
             commentFromRepo.setContent(comment.getContent());
-//            commentFromRepo.setNews(session.merge(comment.getNews()));
             commentFromRepo.setLastUpdateDate(LocalDateTime.now());
             commentAtomicReference.set(commentFromRepo);
         });

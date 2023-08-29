@@ -36,12 +36,16 @@ public class TagRepository implements BaseRepository<Tag, Long> {
             StringBuilder queryString = new StringBuilder("select n from Tag n");
             if (sortBy != null)
                 queryString.append(" order by ").append(sortBy);
-            resultList.set(
-                    session.createQuery(queryString.toString(), Tag.class)
-                            .setFirstResult((pageNumber - 1) * pageSize)
-                            .setMaxResults(pageSize)
-                            .getResultList()
-            );
+            if (pageNumber != null) {
+                resultList.set(
+                        session.createQuery(queryString.toString(), Tag.class)
+                                .setFirstResult((pageNumber - 1) * pageSize)
+                                .setMaxResults(pageSize)
+                                .getResultList());
+            } else {
+                resultList.set(
+                        session.createQuery("select n from Tag n", Tag.class).getResultList());
+            }
         });
         return resultList.get();
     }

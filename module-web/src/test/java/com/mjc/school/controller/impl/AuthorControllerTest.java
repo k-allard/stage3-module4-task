@@ -4,6 +4,11 @@ import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.ServiceAuthorRequestDto;
 import com.mjc.school.service.dto.ServiceAuthorResponseDto;
 import io.restassured.RestAssured;
+
+import io.restassured.RestAssured.*;
+import io.restassured.matcher.RestAssuredMatchers.*;
+import org.hamcrest.Matchers.*;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +17,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.hamcrest.Matchers.notNullValue;
+import static io.restassured.RestAssured.get;
 
 //TODO add all tests
 @ExtendWith(SpringExtension.class)
@@ -30,5 +36,10 @@ public class AuthorControllerTest {
                 .then()
                 .body(notNullValue())
                 .statusCode(200);
+    }
+
+    @Test
+    public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
+        get("/").then().statusCode(200);
     }
 }

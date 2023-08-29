@@ -36,12 +36,16 @@ public class AuthorRepository implements BaseRepository<Author, Long> {
             StringBuilder queryString = new StringBuilder("select a from Author a");
             if (sortBy != null)
                 queryString.append(" order by ").append(sortBy);
-            resultList.set(
-                    session.createQuery(queryString.toString(), Author.class)
-                            .setFirstResult((pageNumber - 1) * pageSize)
-                            .setMaxResults(pageSize)
-                            .getResultList()
-            );
+            if (pageNumber != null) {
+                resultList.set(
+                        session.createQuery(queryString.toString(), Author.class)
+                                .setFirstResult((pageNumber - 1) * pageSize)
+                                .setMaxResults(pageSize)
+                                .getResultList());
+            } else {
+                resultList.set(
+                        session.createQuery("select a from Author a", Author.class).getResultList());
+            }
         });
         return resultList.get();
     }

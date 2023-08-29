@@ -47,12 +47,16 @@ public class NewsRepository implements BaseRepository<News, Long>, ExtendedRepos
             StringBuilder queryString = new StringBuilder("select n from News n");
             if (sortBy != null)
                 queryString.append(" order by ").append(sortBy);
-            resultList.set(
-                    session.createQuery(queryString.toString(), News.class)
-                            .setFirstResult((pageNumber - 1) * pageSize)
-                            .setMaxResults(pageSize)
-                            .getResultList()
-            );
+            if (pageNumber != null) {
+                resultList.set(
+                        session.createQuery(queryString.toString(), News.class)
+                                .setFirstResult((pageNumber - 1) * pageSize)
+                                .setMaxResults(pageSize)
+                                .getResultList());
+            } else {
+                resultList.set(
+                        session.createQuery("select n from News n", News.class).getResultList());
+            }
         });
         return resultList.get();
     }
