@@ -18,7 +18,6 @@ import com.mjc.school.service.dto.ServiceTagDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,7 +35,6 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping(value = ("/news"))
-@Validated
 public class NewsController implements BaseController<NewsRequestDto, NewsResponseDto, Long>, ExtendedController {
     private final BaseService<ServiceNewsRequestDto, ServiceNewsResponseDto, Long> newsService;
     private final ExtendedService extendedService;
