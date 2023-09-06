@@ -87,7 +87,7 @@ All input parameters (requests) should be validated directly in business logic c
 
 #### Testing
 
-- [ ] Cover controller layer with JUnit tests using e.g. [RestAssured Framework](https://semaphoreci.com/community/tutorials/testing-rest-endpoints-using-rest-assured).
+- [x] Cover controller layer with JUnit tests using e.g. [RestAssured Framework](https://semaphoreci.com/community/tutorials/testing-rest-endpoints-using-rest-assured).
 
 #### General requirements:
 
